@@ -20,7 +20,7 @@ services:
       placement:
         constraints: [node.role == manager]
 
-secret:
+secrets:
   ssl_cert:
     external: true
   ssl_cert_key:
