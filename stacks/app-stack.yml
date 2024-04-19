@@ -21,9 +21,12 @@ services:
       - app_network
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
       placement:
         constraints: [node.platform.os == linux]
+      limits:
+        cpus: '0.25'
+        memory: 128M
 
   redis:
     image: redis:latest
