@@ -1,0 +1,38 @@
+{
+    "accounts": [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "balance": 100,
+            "transactions": [
+                {
+                    "id": 1,
+                    "amount": 50,
+                    "date": "2019-01-01"
+                },
+                {
+                    "id": 2,
+                    "amount": 50,
+                    "date": "2019-01-02"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Jane Doe",
+            "balance": 200,
+            "transactions": [
+                {
+                    "id": 3,
+                    "amount": 100,
+                    "date": "2019-01-01"
+                },
+                {
+                    "id": 4,
+                    "amount": 100,
+                    "date": "2019-01-02"
+                }
+            ]
+        }
+    ]
+}

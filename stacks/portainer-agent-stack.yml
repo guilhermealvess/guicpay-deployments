@@ -12,6 +12,10 @@ services:
       mode: global
       placement:
         constraints: [node.platform.os == linux]
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2048M
 
   portainer:
     image: portainer/portainer-ce:2.19.4
@@ -30,6 +34,10 @@ services:
       replicas: 1
       placement:
         constraints: [node.role == manager]
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2048M
 
 networks:
   agent_network:

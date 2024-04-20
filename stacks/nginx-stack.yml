@@ -19,6 +19,11 @@ services:
       replicas: 1
       placement:
         constraints: [node.platform.os == linux]
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1024M
+
 secrets:
   ssl_cert:
     external: true

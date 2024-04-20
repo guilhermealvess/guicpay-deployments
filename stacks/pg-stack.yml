@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: ozApGB6je7ZbK8wRGOh2zHG0qDfGcTi1yO78ieiQMN7eim2NfW
+      POSTGRES_DB: db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - pg_network
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.platform.os == linux]
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2048M
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@guicpay.tech
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - pg_network
+      - nginx_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1024M
+
+  pghero:
+    image: ankane/pghero:latest
+    environment:
+      DATABASE_URL: postgres://user:ozApGB6je7ZbK8wRGOh2zHG0qDfGcTi1yO78ieiQMN7eim2NfW@postgres:5432/db?sslmode=disable
+    ports:
+      - "8080:8080"
+    networks:
+      - pg_network
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.platform.os == linux]
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1024M
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+networks:
+  nginx_network:
+    external: true
+  pg_network:
+    external: true  
